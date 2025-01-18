@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Car;
 use Laravel\Sanctum\HasApiTokens;
 use Laravel\Jetstream\HasProfilePhoto;
 use Spatie\Permission\Traits\HasRoles;
@@ -31,6 +32,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'address',         // Tambahkan kolom address
+        'phone_number',    // Tambahkan kolom phone_number
+        'driver_license',  // Tambahkan kolom driver_license
     ];
 
     /**
@@ -65,5 +69,10 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function cars()
+    {
+        return $this->hasMany(Car::class);
     }
 }

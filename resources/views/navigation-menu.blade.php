@@ -19,17 +19,17 @@
 
 
 
-                    @can('manage categories')
-                        <x-nav-link :href="route('admin.categories.index')" :active="request()->routeIs('admin.categories.index')">
-                            {{ __('Manage Categories ') }}
+                    @can('manage cars')
+                        <x-nav-link :href="route('admin.cars.index')" :active="request()->routeIs('admin.cars.index')">
+                            {{ __('Manage Cars ') }}
                         </x-nav-link>
                     @endcan
 
-                    {{-- @can('manage manajemen')
-                        <x-nav-link :href="route('admin.company.index')" :active="request()->routeIs('admin.company.index')">
-                            {{ __('Manage Manajemen') }}
+                    @can('manage rentals')
+                        <x-nav-link :href="route('admin.rentals.index')" :active="request()->routeIs('admin.rentals.index')">
+                            {{ __('Manage Rentals') }}
                         </x-nav-link>
-                    @endcan --}}
+                    @endcan
 
                 </div>
 

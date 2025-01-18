@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\Admin\CarController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\RentalController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -24,9 +26,33 @@ Route::middleware('auth')->group(function () {
     Route::prefix('admin')->name('admin.')->group(function () {
 
 
-        Route::middleware('can:manage categories')->group(function () {
-            Route::resource('categories', CategoryController::class);
+        Route::middleware('can:manage cars')->group(function () {
+            // Route::resource('categories', CarController::class);
+            Route::resource('cars', CarController::class);
+        });
+        Route::middleware('can:manage rentals')->group(function () {
+            // Route::resource('categories', CategoryController::class);
+            Route::resource('rentals', RentalController::class);
+            Route::post('rentals/return', [RentalController::class, 'returnCar'])->name('rentals.return');
         });
 
+    });
+});
+
+
+
+Route::prefix('admin')->name('admin.')->group(function () {
+
+    // Route untuk manajemen mobil, hanya dapat diakses oleh yang memiliki hak 'manage cars'
+    Route::middleware('can:manage cars')->group(function () {
+        Route::resource('cars', CarController::class);
+    });
+
+    // Route untuk manajemen rental, hanya dapat diakses oleh yang memiliki hak 'manage rentals'
+    Route::middleware('can:manage rentals')->group(function () {
+        Route::resource('rentals', RentalController::class);
+
+        // Route untuk pengembalian mobil
+        Route::post('rentals/return', [RentalController::class, 'returnCar'])->name('rentals.return');
     });
 });

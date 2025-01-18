@@ -20,8 +20,8 @@ class RolePermissionSeeder extends Seeder
         //
         // membuat kumpulan permision menggunakan array
         $permissions = [
-            'manage categories',/* untuk mengelolah data kategori */
-            'manage manajemen',/* untuk mengelolah data kategori */
+            'manage cars',/* untuk mengelolah data kategori */
+            'manage rentals',/* untuk mengelolah data kategori */
         ];
 
         foreach($permissions as $permission) {
@@ -35,8 +35,8 @@ class RolePermissionSeeder extends Seeder
         ]);
 
         $adminPermissions = [
-            // 'manage userall',
-            'manage manajemen',
+            // 'manage cars',/* untuk mengelolah data kategori */
+            'manage rentals',/* untuk mengelolah data kategori */
 
         ];
 
@@ -48,7 +48,8 @@ class RolePermissionSeeder extends Seeder
         ]);
 
         $userPermissions = [
-            'manage manajemen',/* untuk membuat beberapa pekerjaan  */
+            // 'manage cars',/* untuk mengelolah data kategori */
+            'manage rentals',/* untuk mengelolah data kategori */
 
         ];
 
@@ -64,10 +65,11 @@ class RolePermissionSeeder extends Seeder
         $user = User::create([
             'name' => 'Super Admin',
             'email' => 'muhradifansyah@gmail.com',
-            // 'occupation' => 'Superadmin',
-            // 'experience' => 100,
+            'address' => 'Lauwo, Kec. Buntulia, Kabupaten Pohuwato, Gorontalo',
+            'phone_number' => '085340000000',
             // 'avatar' => 'images/default-avatar.png',
-            'password' => bcrypt('12345678')
+            'driver_license' => 'B 1234567',
+            'password' => bcrypt('asdfasdf')
         ]);
         $user->assignRole($superAdminRole);
     }
