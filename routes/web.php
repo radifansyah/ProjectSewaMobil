@@ -24,21 +24,19 @@ Route::middleware('auth')->group(function () {
 
 
 
-    Route::prefix('admin')->name('admin.')->group(function () {
+    // Route::prefix('admin')->name('admin.')->group(function () {
 
 
-        Route::middleware('can:manage cars')->group(function () {
-            // Route::resource('categories', CarController::class);
-            Route::resource('cars', CarController::class);
-        });
-        Route::middleware('can:manage rentals')->group(function () {
-            // Route::resource('categories', CategoryController::class);
-            Route::resource('rentals', RentalController::class);
-            Route::post('rentals/return', [RentalController::class, 'returnCar'])->name('rentals.return');
-        });
-
-    });
-});
+    //     // Route::middleware('can:manage cars')->group(function () {
+    //     //     // Route::resource('categories', CarController::class);
+    //     //     Route::resource('cars', CarController::class);
+    //     // });
+    //     // Route::middleware('can:manage rentals')->group(function () {
+    //     //     // Route::resource('categories', CategoryController::class);
+    //     //     Route::resource('rentals', RentalController::class);
+    //     //     Route::post('rentals/return', [RentalController::class, 'returnCar'])->name('rentals.return');
+    //     // });
+    // });
 
 
 
@@ -62,4 +60,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         // Route untuk pengembalian mobil
     });
+});
+
 });
