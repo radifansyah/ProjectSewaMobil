@@ -1,0 +1,10 @@
+Saya telah membuat sebuah aplikasi menggunakan Laravel 11 dengan memanfaatkan Laravel Jetstream sebagai starter kit untuk otentikasi dan manajemen pengguna. Aplikasi ini juga menggunakan library Spatie untuk menangani berbagai kebutuhan, seperti manajemen izin (permissions), log aktivitas (activity logs), dan fitur-fitur lainnya yang mendukung pengelolaan data dengan lebih aman dan efisien. Dengan kombinasi ini, aplikasi saya memiliki struktur yang modern, aman, dan scalable untuk kebutuhan pengembangan lebih lanjut.
+
+Bukan di Terminal Ketikkan
+npm run dev
+php artisan serve
+
+
+Email dan Password SuperAdmin
+email : muhradifansyah@gmail.com
+password  : asdfasdf
