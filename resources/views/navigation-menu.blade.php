@@ -27,9 +27,15 @@
 
                     @can('manage rentals')
                         <x-nav-link :href="route('admin.rentals.index')" :active="request()->routeIs('admin.rentals.index')">
-                            {{ __('Manage Rentals') }}
+                            {{ __(' Rental Mobil') }}
                         </x-nav-link>
                     @endcan
+
+                    @can('manage rentalsAll')
+                    <x-nav-link :href="route('admin.rentalsAll.index')" :active="request()->routeIs('admin.rentalsAll.index')">
+                        {{ __('Manage Rentals All') }}
+                    </x-nav-link>
+                @endcan
 
                 </div>
 

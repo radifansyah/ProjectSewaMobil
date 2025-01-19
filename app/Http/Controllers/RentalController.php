@@ -13,11 +13,24 @@ class RentalController extends Controller
      * Display a listing of the rentals.
      */
     public function index()
-    {
-        $rentals = Rental::where('user_id', auth()->id())->with('car')->get();
+{
+    $userId = auth()->id();
 
-        return view('admin.rentals.index', compact('rentals'));
-    }
+    // Fetch rentals that are completed (history)
+    $historyRentals = Rental::where('user_id', $userId)
+        ->where('status', 'completed')
+        ->with('car')
+        ->get();
+
+    // Fetch rentals that are ongoing
+    $ongoingRentals = Rental::where('user_id', $userId)
+        ->where('status', 'ongoing')
+        ->with('car')
+        ->get();
+
+    return view('admin.rentals.index', compact('historyRentals', 'ongoingRentals'));
+}
+
 
     /**
      * Show the form for creating a new rental.
@@ -101,23 +114,5 @@ class RentalController extends Controller
     /**
      * Handle car return.
      */
-    public function returnCar(Request $request)
-    {
-        $request->validate([
-            'car_id' => 'required|exists:cars,id',
-        ]);
 
-        $rental = Rental::where('car_id', $request->car_id)
-            ->where('user_id', auth()->id())
-            ->where('status', 'ongoing')
-            ->firstOrFail();
-
-        // Tandai rental sebagai "returned"
-        $rental->update(['status' => 'returned']);
-
-        // Ubah status mobil menjadi "available"
-        $rental->car->update(['status' => 'available']);
-
-        return redirect()->route('admin.rentals.index')->with('success', 'Car returned successfully!');
-    }
 }

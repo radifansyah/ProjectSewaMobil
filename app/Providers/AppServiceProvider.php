@@ -20,12 +20,15 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-         //tambahkan
-         Gate::before(function($user, $ability){
-            if($user->hasRole('super_admin')) {
-                return true;
+        Gate::before(function ($user, $ability) {
+            if ($user->hasRole('super_admin')) {
+                // Super admin tidak memiliki izin untuk 'upload documents'
+                if ($ability === 'manage rentals') {
+                    return null; // Tidak memberikan izin untuk upload documents
+                }
+
+                return true; // Memberikan izin untuk kemampuan lainnya
             }
         });
-        //
     }
 }

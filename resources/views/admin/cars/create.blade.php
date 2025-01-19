@@ -8,18 +8,7 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg p-6">
-                {{-- Tampilkan Semua Error
-                @if ($errors->any())
-                    <div class="mb-4">
-                        <div class="bg-red-500 text-white font-medium p-3 rounded">
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    </div>
-                @endif --}}
+
 
                 <form action="{{ route('admin.cars.store') }}" method="POST">
                     @csrf
@@ -69,20 +58,21 @@
                         @enderror
                     </div>
 
-                    {{-- Tarif Sewa --}}
                     <div class="mb-4">
                         <label for="rental_rate" class="block text-sm font-medium text-gray-700">Tarif Sewa per Hari (Rp)</label>
                         <input
-                            type="number"
+                            type="text"
                             name="rental_rate"
                             id="rental_rate"
                             value="{{ old('rental_rate') }}"
                             class="mt-1 block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                            oninput="formatCurrency(this)"
                             required>
                         @error('rental_rate')
                             <span class="text-red-500 text-sm">{{ $message }}</span>
                         @enderror
                     </div>
+
 
                     {{-- Tombol Submit --}}
                     <div class="flex justify-end">
@@ -94,4 +84,16 @@
             </div>
         </div>
     </div>
+
+{{-- Script ini Untuk Format Uang Agar bisa Otomatis Gaes --}}
+    <script>
+        function formatCurrency(input) {
+            // Hapus karakter non-numerik kecuali angka
+            let value = input.value.replace(/[^0-9]/g, '');
+
+            // Tambahkan format "Rp" dan pisahkan ribuan
+            input.value = value ? 'Rp ' + new Intl.NumberFormat('id-ID').format(value) : '';
+        }
+    </script>
+
 </x-app-layout>

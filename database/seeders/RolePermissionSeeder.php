@@ -22,6 +22,7 @@ class RolePermissionSeeder extends Seeder
         $permissions = [
             'manage cars',/* untuk mengelolah data kategori */
             'manage rentals',/* untuk mengelolah data kategori */
+            'manage rentalsAll',/* untuk mengelolah data kategori */
         ];
 
         foreach($permissions as $permission) {

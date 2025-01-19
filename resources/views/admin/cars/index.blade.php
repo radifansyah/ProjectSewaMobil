@@ -26,29 +26,38 @@
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Model</th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nomor Plat</th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tarif Sewa (Rp)</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
                                 <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Aksi</th>
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
                             @forelse($cars as $car)
-                                <tr>
-                                    <td class="px-6 py-4 whitespace-nowrap">{{ $car->brand }}</td>
-                                    <td class="px-6 py-4 whitespace-nowrap">{{ $car->model }}</td>
-                                    <td class="px-6 py-4 whitespace-nowrap">{{ $car->license_plate }}</td>
-                                    <td class="px-6 py-4 whitespace-nowrap">Rp {{ number_format($car->rental_rate, 0, ',', '.') }}</td>
-                                    <td class="px-6 py-4 whitespace-nowrap">
-                                        <a href="{{ route('admin.cars.edit', $car->id) }}" style="margin-right: 10px" class="px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600">
-                                            Edit
-                                        </a>
-                                        <form action="{{ route('admin.cars.destroy', $car->id) }}" method="POST" class="inline">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">
-                                                Hapus
-                                            </button>
-                                        </form>
-                                    </td>
-                                </tr>
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap">{{ $car->brand }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap">{{ $car->model }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap">{{ $car->license_plate }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap">Rp {{ number_format($car->rental_rate, 0, ',', '.') }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    @if($car->status === 'rented')
+                                        <span class="text-red-500">Sedang Disewa</span>
+                                    @else
+                                        <span class="text-green-500">Tersedia</span>
+                                    @endif
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <a href="{{ route('admin.cars.edit', $car->id) }}" style="margin-right: 10px" class="px-4 py-2 bg-yellow-500 text-white rounded hover:bg-yellow-600">
+                                        Edit
+                                    </a>
+                                    <form action="{{ route('admin.cars.destroy', $car->id) }}" method="POST" class="inline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">
+                                            Hapus
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+
                             @empty
                                 <tr>
                                     <td colspan="5" class="px-6 py-4 text-center text-gray-500">Belum ada mobil terdaftar.</td>
